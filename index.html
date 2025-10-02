@@ -206,7 +206,16 @@
       scroll-behavior: smooth;
     }
     
-   
+/* Korekta dla kotwic z fiksowanym nagłówkiem (naprawia problem "zjeżdżania za wysoko") */
+#kontakt:before, #o-mnie:before, #oferta:before, #nagrania:before, #opinie:before {
+  content: "";
+  display: block;
+  /* ZMNIEJSZAM WYSOKOŚĆ KOREKTY */
+  height: 64px; /* Wcześniej było 90px, teraz ustawiamy mniejszą wysokość */
+  margin-top: 35px; /* Przesuwa kotwicę w górę */
+  visibility: hidden;
+  pointer-events: none;
+}
 
    /* ZMIEŃ ten fragment w bloku <style> */
 
@@ -243,6 +252,13 @@
     transform: translateX(0);
 }
 
+
+/* Styl dla małego logo w nagłówku */
+    .header-logo {
+        width: 54px;  /* Szerokość */
+        height: 54px; /* Wysokość */
+        margin-right: 8px; /* Mały odstęp od tekstu VOCAVIOLIN */
+    }
   </style>
 </head>
 <body class="text-white">
@@ -250,7 +266,8 @@
  <header class="glass-header fixed w-full top-0 z-50">
     <nav class="container mx-auto flex justify-between items-center p-4">
         
-        <h1 class="text-2xl font-light">
+        <h1 class="text-2xl font-light flex items-center">
+            <img src="assets/images/biale_logo.png" alt="Logo Vocaviolin" class="header-logo">
             <span class="logo-font">VOCAVIOLIN</span>
         </h1>
 
@@ -286,7 +303,7 @@
             <h2 class="text-5xl md:text-7xl font-light mb-4">
                 <span class="logo-font">VOCAVIOLIN</span>
             </h2>
-           <h3 class="text-6xl md:text-7xl font-light mb-6 text-[#FFFBF7] moon-time-font">
+           <h3 class="text-6xl md:text-7xl font-light mb-6 text-[#F2F1EB] moon-time-font">
                 Oprawa muzyczna 
             </h3>
             
@@ -381,17 +398,19 @@
         
         <div class="video-card">
             <div class="aspect-video bg-black rounded-lg overflow-hidden shadow-xl">
-                <iframe class="w-full h-full" src="https://www.youtube.com/embed/ScMzIvxBSi4" title="YouTube video 1" frameborder="0" allowfullscreen></iframe>
+                <iframe class="w-full h-full" src="https://www.youtube.com/embed/YGfYnUPLwRk?si=_jb3Rqn1FaGbojVR" title="YouTube video 1" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
         
         <div class="video-card">
-            <img src="https://images.unsplash.com/photo-1598514982860-cd6e1bc0d2a0?auto=format&fit=crop&w=800&q=80" alt="Występ" class="rounded-lg shadow-xl w-full h-full object-cover">
+            <div class="aspect-video bg-black rounded-lg overflow-hidden shadow-xl">
+                <iframe class="w-full h-full" src="https://www.youtube.com/embed/N_QYAUEnx3o?si=ApmtOV_7ZMFV5TIe" title="YouTube video 1" frameborder="0" allowfullscreen></iframe>
+            </div>
         </div>
         
         <div class="video-card">
             <div class="aspect-video bg-black rounded-lg overflow-hidden shadow-xl">
-                <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video 2" frameborder="0" allowfullscreen></iframe>
+                <iframe class="w-full h-full" src="https://www.youtube.com/embed/A05XnKbgIm4?si=uwwlyMb4WvKvE_ea" title="YouTube video 2" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
         
@@ -459,12 +478,8 @@
       <span>+48 696 578 985</span>
     </a>
   </div>
-
-  <p class="mb-6 text-white text-lg">Lub zapraszam do formularza</p>
-
   <form action="send.php" method="POST" class="bg-white/10 p-6 rounded-xl backdrop-blur-lg shadow-lg max-w-lg w-full space-y-4">
-    <h4 class="text-2xl font-semibold mb-2">Formularz rezerwacji</h4>
-    
+    <h4 class="text-2xl font-semibold mb-2 text-center">Zapytaj o termin</h4>
     <div>
       <label for="name" class="block mb-1">Imię i nazwisko</label>
       <input type="text" id="name" name="name" required class="w-full p-2 rounded bg-white/20 border border-white/30">
@@ -558,6 +573,7 @@
     };
     window.addEventListener('scroll', reveal);
     reveal();
+    
 
     // Logika menu hamburgerowego
     const menuToggle = document.getElementById('menu-toggle');
