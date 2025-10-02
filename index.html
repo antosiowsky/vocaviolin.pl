@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vocaviolin — Skrzypce i Wokal</title>
+  <title>Vocaviolin - Oprawa muzyczna</title>
   <script src="https://cdn.tailwindcss.com"></script>
   
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@500&display=swap" rel="stylesheet">
@@ -69,14 +69,53 @@
     }
     /* ------------------------------------------- */
     
+
+    /* ... (reszta Twoich definicji The Seasons) ... */
+
+    /* DEFINICJA CZCIONKI 'MOON TIME' dla OPRAWA MUZYCZNA */
+    @font-face {
+        font-family: 'Moon Time';
+        src: url('assets/fonts/moon_time/FontsFree-Net-MoonTime-Regular-1.ttf') format('truetype');
+        font-weight: 400; 
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    /* DEFINICJA CZCIONKI 'LORA' dla MICHALINA PORSZKE... */
+    /* Używamy formatu OpenType, ponieważ to czcionka zmienna (VariableFont) */
+    @font-face {
+        font-family: 'Lora-Variable';
+        src: url('assets/fonts/lora/Lora-VariableFont_wght.ttf') format('truetype-variations');
+        font-weight: 100 900; /* Definiujemy zakres wag dla Variable Font */
+        font-style: normal;
+        font-display: swap;
+    }
+
+    /* ------------------------------------------- */
+
+    /* DODAJ NOWE KLASY, aby zastosować czcionki */
+    .moon-time-font {
+        font-family: 'Moon Time', cursive;
+        letter-spacing: 0.1em; /* Subtelny odstęp dla tej czcionki */
+        font-weight: 400; /* Czcionka ma tylko jedną wagę */
+    }
+
+    .lora-font {
+        font-family: 'Lora-Variable', serif;
+        font-weight: 300; /* Używamy cienkiego wariantu dla elegancji */
+        letter-spacing: 0.15em;
+    }
+
+    /* ... (reszta Twoich stylów) ... */
     
     /* Styl nagłówka glassmorphism */
     .glass-header {
-      background-color: rgba(255, 255, 255, 0.15);
-      -webkit-backdrop-filter: blur(10px) saturate(120%);
-      backdrop-filter: blur(10px) saturate(120%);
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
+  background-color: rgba(255, 255, 255, 0.15);
+  -webkit-backdrop-filter: blur(10px) saturate(120%);
+  backdrop-filter: blur(10px) saturate(120%);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  z-index: 100; /* Zapewnienie, że nav jest zawsze na wierzchu */
+}
 
     /* Efekt fade-in przy przewijaniu */
     .fade-section {
@@ -118,7 +157,7 @@
     #hero-section {
         position: relative;
         /* 🔽 TU WKLEJ SWÓJ LINK DO OBRAZU TŁA HERO 🔽 */
-        background: url('assets/images/micha16;9.png') no-repeat center center; 
+        background: url('assets/images/micha169.png') no-repeat center center; 
         background-size: cover;
         background-position: center top; /* Poprawka na przycinanie góry */
         padding-top: 5rem;
@@ -155,43 +194,94 @@
     html {
       scroll-behavior: smooth;
     }
+
+   
+
+   /* ZMIEŃ ten fragment w bloku <style> */
+
+/* ZMIEŃ ten fragment w bloku <style> */
+
+/* NOWY STYL CSS dla menu, gdy jest aktywne na mobilnym */
+#mobile-menu {
+    /* Ustawienia dla animacji mobilnej (domyślny stan ukrycia) */
+    transform: translateX(-100%); 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50%; /* ZMIENIONO: Menu zajmuje teraz 50% szerokości ekranu */
+    height: 100vh; /* Zajmuje całą wysokość */
+    overflow-y: auto; 
+    z-index: 40; 
+    transition: transform 0.3s ease-out; 
+}
+
+/* WIDOCZNOŚĆ NA DESKTOPIE (md:): 
+   Resetujemy transformacje i pozycjonowanie mobilne */
+@media (min-width: 768px) {
+    #mobile-menu {
+        transform: translateX(0); /* Zawsze widoczne */
+        position: relative;     /* Wracamy do normalnego przepływu */
+        width: auto;            /* Szerokość automatyczna na desktopie */
+        height: auto;
+        overflow-y: visible;
+    }
+}
+
+/* Klasa dodawana przez JavaScript, która aktywuje widoczność */
+#mobile-menu.active {
+    transform: translateX(0);
+}
+
   </style>
 </head>
 <body class="text-white">
 
-  <header class="glass-header fixed w-full top-0 z-50">
+ <header class="glass-header fixed w-full top-0 z-50">
     <nav class="container mx-auto flex justify-between items-center p-4">
-  <h1 class="text-2xl font-light">
-      <span class="logo-font">VOCAVIOLIN</span>
-  </h1>
+        
+        <h1 class="text-2xl font-light">
+            <span class="logo-font">VOCAVIOLIN</span>
+        </h1>
 
-  <ul class="flex space-x-6 items-center">
-    <li><a href="#o-mnie">O mnie</a></li>
-    <li><a href="#oferta">Oferta</a></li>
-    <li><a href="#nagrania">Nagrania & Wideo</a></li>
-    <li><a href="#opinie">Opinie</a></li>
-    <li><a href="#kontakt">Kontakt</a></li>
+        <button id="menu-toggle" class="md:hidden text-white text-xl p-2 z-50">
+            <i class="fas fa-bars"></i>
+        </button>
 
-    <li class="flex space-x-3 ml-6">
-      <a href="https://www.instagram.com/vocaviolin/" target="_blank" class="text-white hover:text-[#A3B18A] transition">
-        <i class="fab fa-instagram"></i>
-      </a>
-      <a href="https://www.facebook.com/people/Vocaviolin-oprawa-muzyczna/61563820214452/" target="_blank" class="text-white hover:text-[#A3B18A] transition">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-    </li>
-  </ul>
-</nav>
-  </header>
+<div id="mobile-menu" class="flex md:flex md:grow md:justify-end absolute md:relative top-0 left-0 md:w-auto h-screen md:bg-transparent bg-gray-900/95 md:p-0 p-12 flex-col md:flex-row items-center justify-start space-y-8 md:space-y-0 transition-transform duration-300">
+            
+            <ul class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 items-center">
+            
+                <li><a href="#o-mnie">O mnie</a></li>
+                <li><a href="#oferta">Oferta</a></li>
+                <li><a href="#nagrania">Nagrania</a></li>
+                <li><a href="#opinie">Opinie</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
 
+                <li class="flex space-x-3 ml-0 md:ml-6 mt-4 md:mt-0">
+                    <a href="https://www.instagram.com/vocaviolin/" target="_blank" class="text-white hover:text-[#A3B18A] transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.facebook.com/people/Vocaviolin-oprawa-muzyczna/61563820214452/" target="_blank" class="text-white hover:text-[#A3B18A] transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
   <section id="hero-section" class="min-h-screen flex items-center px-4 md:px-8">
     <div class="container mx-auto max-w-7xl relative z-10"> 
         <div class="text-center md:text-left pt-20 md:pt-0 max-w-xl mt-32">
             <h2 class="text-5xl md:text-7xl font-light mb-4">
                 <span class="logo-font">VOCAVIOLIN</span>
             </h2>
-            <h3 class="text-3xl md:text-4xl font-light mb-6 text-[#A3B18A]">Skrzypce & Wokal</h3>
-            <p class="text-lg md:text-xl max-w-xl mb-8">Muzyka, która porusza serca — koncerty, oprawa uroczystości, wyjątkowe nagrania.</p>
+           <h3 class="text-6xl md:text-7xl font-light mb-6 text-[#A3B18A] moon-time-font">
+                Oprawa muzyczna 
+            </h3>
+            
+            <p class="text-lg md:text-xl max-w-xl mb-8 lora-font">
+                MICHALINA PORSZKE | WOKAL I SKRZYPCE | ŚLĄSK
+            </p>
             
             <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                 <a href="#o-mnie" class="bg-[#A3B18A] hover:bg-[#879676] text-white font-semibold py-3 px-6 rounded-full transition w-full sm:w-auto text-center">Poznaj mnie</a>
@@ -209,10 +299,13 @@
         <div class="md:order-1 text-center md:text-left">
             <h3 class="text-4xl mb-6">O mnie</h3>
             <p class="mb-6 text-lg">
-                Jestem skrzypaczką i wokalistką z pasją do muzyki klasycznej i rozrywkowej. 
-                Moja misja to dostarczać emocji i niezapomnianych wrażeń podczas każdej uroczystości.
+                Nazywam się Michalina – jestem skrzypaczką i wokalistką z wieloletnim doświadczeniem scenicznym. 
+                Ukończyłam Państwową Szkołę Muzyczną I i II stopnia w klasie skrzypiec. 
+                Od najmłodszych lat zajmuję się też śpiewem - w 2018 roku byłam uczestniczką pierwszej edycji The Voice Kids.
                 <br><br>
-                Ukończyłam Akademię Muzyczną z wyróżnieniem, a moje doświadczenie obejmuje zarówno występy solowe na prestiżowych galach, jak i kameralną oprawę muzyczną setek ślubów. Staram się łączyć klasyczną elegancję z nowoczesnymi aranżacjami.
+                Od 2023 roku tworzę wyjątkową muzyczną oprawę ślubów, ceremonii plenerowych, jubileuszy i innych uroczystości. 
+                Gram na skrzypcach, śpiewam i – co najważniejsze – opowiadam dźwiękiem historie miłości. 
+                W swojej pracy łączę profesjonalizm, emocje i indywidualne podejście, aby każda oprawa była piękna i niepowtarzalna.
             </p>
             <a href="#oferta" class="mt-4 bg-[#A3B18A] hover:bg-[#879676] text-white font-semibold py-2 px-5 rounded-full transition inline-block">Moja oferta</a>
         </div>
@@ -246,7 +339,7 @@
   </section>
 
   <section id="nagrania" class="fade-section min-h-screen flex flex-col justify-center items-center px-4">
-    <h3 class="text-4xl font-bold mb-8">Nagrania & Wideo</h3>
+    <h3 class="text-4xl font-bold mb-8">Moje nagrania</h3>
     <div class="grid md:grid-cols-3 gap-6 max-w-6xl">
       <div class="aspect-video bg-black rounded-lg overflow-hidden shadow-lg">
         <iframe class="w-full h-full" src="https://www.youtube.com/embed/ScMzIvxBSi4" title="YouTube video" frameborder="0" allowfullscreen></iframe>
@@ -336,6 +429,7 @@
 
 
  <script>
+  
     // Animacje fade-in przy scrollu
     const sections = document.querySelectorAll('.fade-section');
     const reveal = () => {
@@ -349,6 +443,28 @@
     };
     window.addEventListener('scroll', reveal);
     reveal();
+
+    // Logika menu hamburgerowego
+const menuToggle = document.getElementById('menu-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+const navLinks = document.querySelectorAll('#mobile-menu a');
+
+// Funkcja do przełączania menu
+const toggleMenu = () => {
+    mobileMenu.classList.toggle('active'); // Przełączanie klasy dla animacji
+};
+
+// Obsługa kliknięcia ikony hamburgera
+menuToggle.addEventListener('click', toggleMenu);
+
+// Automatyczne zamknięcie menu po kliknięciu linku (na telefonie)
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        if (mobileMenu.classList.contains('active')) {
+            toggleMenu();
+        }
+    });
+});
   </script>
 </body>
 </html>
