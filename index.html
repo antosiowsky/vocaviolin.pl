@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vocaviolin — Skrzypce i Wokal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <style>
+    /* ------------------------------------------- */
+    /* DEFINICJE CZCIONKI 'THE SEASONS' (6 wariantów OTF) */
+    /* ------------------------------------------- */
+
+    /* 1. REGULAR (Normalny krój, standardowy) */
+    @font-face {
+        font-family: 'The Seasons';
+        src: url('assets/fonts/the_seasons/Fontspring-DEMO-theseasons-reg.otf') format('opentype');
+        font-weight: 400; 
+        font-style: normal;
+        font-display: swap;
+    }
+
+    /* 2. LIGHT (Lekki krój) */
+    @font-face {
+        font-family: 'The Seasons';
+        src: url('assets/fonts/the_seasons/Fontspring-DEMO-theseasons-lt.otf') format('opentype');
+        font-weight: 300; 
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    /* 3. BOLD (Gruby krój) */
+    @font-face {
+        font-family: 'The Seasons';
+        src: url('assets/fonts/the_seasons/Fontspring-DEMO-theseasons-bd.otf') format('opentype');
+        font-weight: 700; 
+        font-style: normal;
+        font-display: swap;
+    }
+
+    /* 4. ITALIC (Kursywa, standardowy) */
+    @font-face {
+        font-family: 'The Seasons';
+        src: url('assets/fonts/the_seasons/Fontspring-DEMO-theseasons-it.otf') format('opentype');
+        font-weight: 400;
+        font-style: italic;
+        font-display: swap;
+    }
+
+    /* 5. LIGHT ITALIC (Lekki, kursywa) */
+    @font-face {
+        font-family: 'The Seasons';
+        src: url('assets/fonts/the_seasons/Fontspring-DEMO-theseasons-ltit.otf') format('opentype');
+        font-weight: 300;
+        font-style: italic;
+        font-display: swap;
+    }
+
+    /* 6. BOLD ITALIC (Gruby, kursywa) */
+    @font-face {
+        font-family: 'The Seasons';
+        src: url('assets/fonts/the_seasons/Fontspring-DEMO-theseasons-bdit.otf') format('opentype');
+        font-weight: 700;
+        font-style: italic;
+        font-display: swap;
+    }
+    /* ------------------------------------------- */
+    
+    
+    /* Styl nagłówka glassmorphism */
+    .glass-header {
+      background-color: rgba(255, 255, 255, 0.15);
+      -webkit-backdrop-filter: blur(10px) saturate(120%);
+      backdrop-filter: blur(10px) saturate(120%);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    /* Efekt fade-in przy przewijaniu */
+    .fade-section {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Tło całej strony: Używa Playfair Display (domyślny) */
+    body {
+      font-family: 'Playfair Display', serif; /* Ustawiamy Playfair Display jako główną czcionkę */
+      background-color: #889D7A;
+    }
+    
+    /* Nowa klasa TYLKO dla napisu "Vocaviolin" (Bold) */
+    .logo-font {
+        font-family: 'The Seasons', serif; 
+        font-weight: 700 !important; /* Wymuszenie Bold.otf */
+        letter-spacing: 0.3em; /* Dodanie dużego odstępu */
+    }
+    
+    /* Usunięto reguły, które zmuszały h1, h2, h3, h4 do używania Light/Bold, 
+       teraz używają domyślnego Bold/Regular z Playfair Display */
+    
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0,0,0,0.4); /* przyciemnienie */
+      backdrop-filter: blur(3px); /* rozmycie */
+      z-index: -1;
+    }
+
+    /* Styl dla sekcji HERO (Above the Fold) */
+    #hero-section {
+        position: relative;
+        /* 🔽 TU WKLEJ SWÓJ LINK DO OBRAZU TŁA HERO 🔽 */
+        background: url('assets/images/micha16;9.png') no-repeat center center; 
+        background-size: cover;
+        background-position: center top; /* Poprawka na przycinanie góry */
+        padding-top: 5rem;
+        z-index: 10; 
+    }
+    /* Nakładka (overlay) dla obrazu HERO, by tekst był czytelny */
+    #hero-section::after {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-color: rgba(0, 0, 0, 0.4); /* Ciemna, półprzezroczysta nakładka */
+        z-index: -1;
+    }
+
+    /* Animowane podkreślenie w navbarze */
+    nav ul li a {
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 0%;
+      height: 2px;
+      background-color: #A3B18A;
+      transition: width 0.3s ease;
+    }
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="text-white">
+
+  <header class="glass-header fixed w-full top-0 z-50">
+    <nav class="container mx-auto flex justify-between items-center p-4">
+  <h1 class="text-2xl font-light">
+      <span class="logo-font">VOCAVIOLIN</span>
+  </h1>
+
+  <ul class="flex space-x-6 items-center">
+    <li><a href="#o-mnie">O mnie</a></li>
+    <li><a href="#oferta">Oferta</a></li>
+    <li><a href="#nagrania">Nagrania & Wideo</a></li>
+    <li><a href="#opinie">Opinie</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+
+    <li class="flex space-x-3 ml-6">
+      <a href="https://www.instagram.com/vocaviolin/" target="_blank" class="text-white hover:text-[#A3B18A] transition">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.facebook.com/people/Vocaviolin-oprawa-muzyczna/61563820214452/" target="_blank" class="text-white hover:text-[#A3B18A] transition">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+  </ul>
+</nav>
+  </header>
+
+  <section id="hero-section" class="min-h-screen flex items-center px-4 md:px-8">
+    <div class="container mx-auto max-w-7xl relative z-10"> 
+        <div class="text-center md:text-left pt-20 md:pt-0 max-w-xl mt-32">
+            <h2 class="text-5xl md:text-7xl font-light mb-4">
+                <span class="logo-font">VOCAVIOLIN</span>
+            </h2>
+            <h3 class="text-3xl md:text-4xl font-light mb-6 text-[#A3B18A]">Skrzypce & Wokal</h3>
+            <p class="text-lg md:text-xl max-w-xl mb-8">Muzyka, która porusza serca — koncerty, oprawa uroczystości, wyjątkowe nagrania.</p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                <a href="#o-mnie" class="bg-[#A3B18A] hover:bg-[#879676] text-white font-semibold py-3 px-6 rounded-full transition w-full sm:w-auto text-center">Poznaj mnie</a>
+                <a href="#kontakt" class="bg-white/20 hover:bg-white/30 border border-white/50 text-white font-semibold py-3 px-6 rounded-full transition w-full sm:w-auto text-center">
+                    <i class="fas fa-envelope mr-2"></i>Kontakt
+                </a>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <section id="o-mnie" class="fade-section min-h-screen flex flex-col justify-center items-center px-4 py-16">
+    <div class="container mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        
+        <div class="md:order-1 text-center md:text-left">
+            <h3 class="text-4xl mb-6">O mnie</h3>
+            <p class="mb-6 text-lg">
+                Jestem skrzypaczką i wokalistką z pasją do muzyki klasycznej i rozrywkowej. 
+                Moja misja to dostarczać emocji i niezapomnianych wrażeń podczas każdej uroczystości.
+                <br><br>
+                Ukończyłam Akademię Muzyczną z wyróżnieniem, a moje doświadczenie obejmuje zarówno występy solowe na prestiżowych galach, jak i kameralną oprawę muzyczną setek ślubów. Staram się łączyć klasyczną elegancję z nowoczesnymi aranżacjami.
+            </p>
+            <a href="#oferta" class="mt-4 bg-[#A3B18A] hover:bg-[#879676] text-white font-semibold py-2 px-5 rounded-full transition inline-block">Moja oferta</a>
+        </div>
+        
+        <div class="md:order-2">
+            <img src="assets/images/o_mnie.jpg" alt="Ja przy skrzypcach" class="rounded-xl shadow-2xl fade-section w-full h-auto max-w-full mx-auto">
+        </div>
+
+    </div>
+  </section>
+  <section id="oferta" class="fade-section min-h-screen flex flex-col justify-center items-center px-4">
+    <h3 class="text-4xl font-bold mb-8">Oferta</h3>
+    <div class="grid md:grid-cols-2 gap-8 max-w-5xl">
+      <div class="bg-white/10 p-6 rounded-xl backdrop-blur-lg shadow-lg hover:scale-105 transition">
+        <h4 class="text-2xl font-semibold mb-2">Oprawa muzyczna ślubów</h4>
+        <p>Eleganckie i wzruszające wykonania utworów na skrzypce i wokal, idealne na wyjątkowe chwile.</p>
+      </div>
+      <div class="bg-white/10 p-6 rounded-xl backdrop-blur-lg shadow-lg hover:scale-105 transition">
+        <h4 class="text-2xl font-semibold mb-2">Koncerty kameralne</h4>
+        <p>Repertuar dostosowany do klimatu wydarzenia — od klasyki po współczesne przeboje.</p>
+      </div>
+      <div class="bg-white/10 p-6 rounded-xl backdrop-blur-lg shadow-lg hover:scale-105 transition">
+        <h4 class="text-2xl font-semibold mb-2">Nagrania studyjne</h4>
+        <p>Profesjonalne sesje nagraniowe, zarówno audio, jak i wideo, w wysokiej jakości.</p>
+      </div>
+      <div class="bg-white/10 p-6 rounded-xl backdrop-blur-lg shadow-lg hover:scale-105 transition">
+        <h4 class="text-2xl font-semibold mb-2">Aranżacje indywidualne</h4>
+        <p>Tworzenie unikatowych wersji utworów specjalnie dla Ciebie.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="nagrania" class="fade-section min-h-screen flex flex-col justify-center items-center px-4">
+    <h3 class="text-4xl font-bold mb-8">Nagrania & Wideo</h3>
+    <div class="grid md:grid-cols-3 gap-6 max-w-6xl">
+      <div class="aspect-video bg-black rounded-lg overflow-hidden shadow-lg">
+        <iframe class="w-full h-full" src="https://www.youtube.com/embed/ScMzIvxBSi4" title="YouTube video" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <img src="https://images.unsplash.com/photo-1598514982860-cd6e1bc0d2a0?auto=format&fit=crop&w=800&q=80" alt="Występ" class="rounded-lg shadow-lg hover:scale-105 transition">
+      <div class="aspect-video bg-black rounded-lg overflow-hidden shadow-lg">
+        <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section id="opinie" class="fade-section min-h-screen flex flex-col justify-center items-center px-4">
+    <h3 class="text-4xl font-bold mb-4">Opinie</h3>
+    <blockquote class="italic max-w-2xl text-center">
+      „Niesamowity talent i piękne wykonanie. Goście byli zachwyceni!” — Anna K.
+    </blockquote>
+  </section>
+
+<section id="kontakt" class="fade-section min-h-screen flex flex-col justify-center items-center px-4">
+  <h3 class="text-4xl font-bold mb-8">Kontakt</h3>
+
+  <div class="flex flex-col sm:flex-row gap-6 mb-8">
+    <a href="https://www.instagram.com/vocaviolin/" target="_blank" class="flex items-center gap-3 text-white hover:text-[#A3B18A] transition">
+      <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+        <i class="fab fa-instagram text-2xl"></i>
+      </div>
+      <span>@vocaviolin</span>
+    </a>
+
+    <a href="https://www.facebook.com/people/Vocaviolin-oprawa-muzyczna/61563820214452/" target="_blank" class="flex items-center gap-3 text-white hover:text-[#A3B18A] transition">
+      <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+        <i class="fab fa-facebook-f text-2xl"></i>
+      </div>
+      <span>/vocaviolin</span>
+    </a>
+
+    <a href="mailto:kontakt@vocaviolin.pl" class="flex items-center gap-3 text-white hover:text-[#A3B18A] transition">
+      <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+        <i class="fas fa-envelope text-2xl"></i>
+      </div>
+      <span>kontakt@vocaviolin.pl</span>
+    </a>
+
+    <a href="tel:+48696578985" class="flex items-center gap-3 text-white hover:text-[#A3B18A] transition">
+      <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+        <i class="fas fa-phone-alt text-2xl"></i>
+      </div>
+      <span>+48 696 578 985</span>
+    </a>
+  </div>
+
+  <p class="mb-6 text-white text-lg">Lub zapraszam do formularza</p>
+
+  <form action="send.php" method="POST" class="bg-white/10 p-6 rounded-xl backdrop-blur-lg shadow-lg max-w-lg w-full space-y-4">
+    <h4 class="text-2xl font-semibold mb-2">Formularz rezerwacji</h4>
+    
+    <div>
+      <label for="name" class="block mb-1">Imię i nazwisko</label>
+      <input type="text" id="name" name="name" required class="w-full p-2 rounded bg-white/20 border border-white/30">
+    </div>
+
+    <div>
+      <label for="email" class="block mb-1">Twój adres e-mail</label>
+      <input type="email" id="email" name="email" required class="w-full p-2 rounded bg-white/20 border border-white/30">
+    </div>
+    <div>
+      <label for="datetime" class="block mb-1">Data i godzina wydarzenia</label>
+      <input type="datetime-local" id="datetime" name="datetime" required class="w-full p-2 rounded bg-white/20 border border-white/30">
+    </div>
+    
+    <div>
+      <label for="location" class="block mb-1">Lokalizacja</label>
+      <input type="text" id="location" name="location" required class="w-full p-2 rounded bg-white/20 border border-white/30">
+    </div>
+    
+    <div>
+      <label for="notes" class="block mb-1">Dodatkowe uwagi</label>
+      <textarea id="notes" name="notes" rows="4" class="w-full p-2 rounded bg-white/20 border border-white/30"></textarea>
+    </div>
+
+    <button type="submit" class="w-full bg-[#A3B18A] hover:bg-[#879676] text-white font-semibold py-3 px-6 rounded-full transition">
+      Prześlij formularz
+    </button>
+  </form>
+</section>
+
+
+
+ <script>
+    // Animacje fade-in przy scrollu
+    const sections = document.querySelectorAll('.fade-section');
+    const reveal = () => {
+      const triggerBottom = window.innerHeight * 0.85;
+      sections.forEach(sec => {
+        const boxTop = sec.getBoundingClientRect().top;
+        if(boxTop < triggerBottom) {
+          sec.classList.add('visible');
+        }
+      });
+    };
+    window.addEventListener('scroll', reveal);
+    reveal();
+  </script>
+</body>
+</html>
