@@ -3,263 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vocaviolin - Oprawa muzyczna</title>
+  <title>Vocaviolin - Oprawa muzyczna Rybnik, Śląsk | Wokal i Skrzypce na Ślub</title>
+  <meta name="description" content="Wyjątkowa oprawa muzyczna ślubów (wokal i skrzypce) w Rybniku, Katowicach i na całym Śląsku. Muzyka, która porusza serca. Sprawdź wolne terminy.">
+  <link rel="icon" type="image/svg+xml" href="assets/images/biale_logo.svg">
+    <!-- Fallbacky dla przeglądarek, które nie ładują SVG jako favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/biale_logo.png">
+    <link rel="shortcut icon" href="assets/images/biale_logo.png" type="image/png">
+    <meta name="theme-color" content="#889D7A">
   <script src="https://cdn.tailwindcss.com"></script>
-  
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-  <style>
-    /* ------------------------------------------- */
-    /* DEFINICJE CZCIONKI 'THE SEASONS' (6 wariantów OTF) */
-    /* ------------------------------------------- */
-
-    /* 1. REGULAR (Normalny krój, standardowy) */
-    @font-face {
-        font-family: 'The Seasons';
-        src: url('assets/fonts/the_seasons/Fontspring-DEMO-theseasons-reg.otf') format('opentype');
-        font-weight: 400; 
-        font-style: normal;
-        font-display: swap;
-    }
-
-    /* 2. LIGHT (Lekki krój) */
-    @font-face {
-        font-family: 'The Seasons';
-        src: url('assets/fonts/the_seasons/Fontspring-DEMO-theseasons-lt.otf') format('opentype');
-        font-weight: 300; 
-        font-style: normal;
-        font-display: swap;
-    }
-    
-    /* 3. BOLD (Gruby krój) */
-    @font-face {
-        font-family: 'The Seasons';
-        src: url('assets/fonts/the_seasons/Fontspring-DEMO-theseasons-bd.otf') format('opentype');
-        font-weight: 700; 
-        font-style: normal;
-        font-display: swap;
-    }
-
-    /* 4. ITALIC (Kursywa, standardowy) */
-    @font-face {
-        font-family: 'The Seasons';
-        src: url('assets/fonts/the_seasons/Fontspring-DEMO-theseasons-it.otf') format('opentype');
-        font-weight: 400;
-        font-style: italic;
-        font-display: swap;
-    }
-
-    /* 5. LIGHT ITALIC (Lekki, kursywa) */
-    @font-face {
-        font-family: 'The Seasons';
-        src: url('assets/fonts/the_seasons/Fontspring-DEMO-theseasons-ltit.otf') format('opentype');
-        font-weight: 300;
-        font-style: italic;
-        font-display: swap;
-    }
-
-    /* 6. BOLD ITALIC (Gruby, kursywa) */
-    @font-face {
-        font-family: 'The Seasons';
-        src: url('assets/fonts/the_seasons/Fontspring-DEMO-theseasons-bdit.otf') format('opentype');
-        font-weight: 700;
-        font-style: italic;
-        font-display: swap;
-    }
-    /* ------------------------------------------- */
-    
-
-    /* ... (reszta Twoich definicji The Seasons) ... */
-
-    /* DEFINICJA CZCIONKI 'MOON TIME' dla OPRAWA MUZYCZNA */
-    @font-face {
-        font-family: 'Moon Time';
-        src: url('assets/fonts/moon_time/FontsFree-Net-MoonTime-Regular-1.ttf') format('truetype');
-        font-weight: 400; 
-        font-style: normal;
-        font-display: swap;
-    }
-    
-    /* DEFINICJA CZCIONKI 'LORA' dla MICHALINA PORSZKE... */
-    /* Używamy formatu OpenType, ponieważ to czcionka zmienna (VariableFont) */
-    @font-face {
-        font-family: 'Lora-Variable';
-        src: url('assets/fonts/lora/Lora-VariableFont_wght.ttf') format('truetype-variations');
-        font-weight: 100 900; /* Definiujemy zakres wag dla Variable Font */
-        font-style: normal;
-        font-display: swap;
-    }
-
-    /* ------------------------------------------- */
-
-    /* DODAJ NOWE KLASY, aby zastosować czcionki */
-    .moon-time-font {
-        font-family: 'Moon Time', cursive;
-        letter-spacing: 0.1em; /* Subtelny odstęp dla tej czcionki */
-        font-weight: 400; /* Czcionka ma tylko jedną wagę */
-    }
-
-    .lora-font {
-        font-family: 'Lora-Variable', serif;
-        font-weight: 300; /* Używamy cienkiego wariantu dla elegancji */
-        letter-spacing: 0.15em;
-    }
-
-    /* ... (reszta Twoich stylów) ... */
-    
-    /* Styl nagłówka glassmorphism */
-    .glass-header {
-  background-color: rgba(255, 255, 255, 0.15);
-  -webkit-backdrop-filter: blur(10px) saturate(120%);
-  backdrop-filter: blur(10px) saturate(120%);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  z-index: 100; /* Zapewnienie, że nav jest zawsze na wierzchu */
-}
-
-    /* Efekt fade-in przy przewijaniu */
-    .fade-section {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .fade-section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Tło całej strony: Używa Playfair Display (domyślny) */
-    body {
-      font-family: 'Playfair Display', serif; /* Ustawiamy Playfair Display jako główną czcionkę */
-      background-color: #889D7A;
-    }
-    
-    /* Nowa klasa TYLKO dla napisu "Vocaviolin" (Bold) */
-    .logo-font {
-        font-family: 'The Seasons', serif; 
-        font-weight: 700 !important; /* Wymuszenie Bold.otf */
-        letter-spacing: 0.3em; /* Dodanie dużego odstępu */
-    }
-
-   /* Efekt powiększenia dla nagrań i galerii */
-    .video-card {
-      transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
-      cursor: pointer;
-    }
-    .video-card:hover {
-      transform: scale(1.10); /* Zwiększone powiększenie (10%) */
-      box-shadow: 0 15px 30px rgba(0,0,0,0.7); /* Bardziej dramatyczny cień */
-      z-index: 20; /* Wymuś by powiększone wideo było nad sąsiednimi */
-    }
-    
-    /* Usunięto reguły, które zmuszały h1, h2, h3, h4 do używania Light/Bold, 
-       teraz używają domyślnego Bold/Regular z Playfair Display */
-    
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: rgba(0,0,0,0.4); /* przyciemnienie */
-      backdrop-filter: blur(3px); /* rozmycie */
-      z-index: -1;
-    }
-
-    /* Styl dla sekcji HERO (Above the Fold) */
-    #hero-section {
-        position: relative;
-        /* 🔽 TU WKLEJ SWÓJ LINK DO OBRAZU TŁA HERO 🔽 */
-        background: url('assets/images/micha169.png') no-repeat center center; 
-        background-size: cover;
-        background-position: center top; /* Poprawka na przycinanie góry */
-        padding-top: 5rem;
-        z-index: 10; 
-    }
-    /* Nakładka (overlay) dla obrazu HERO, by tekst był czytelny */
-    #hero-section::after {
-        content: "";
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background-color: rgba(0, 0, 0, 0.4); /* Ciemna, półprzezroczysta nakładka */
-        z-index: -1;
-    }
-
-    /* Animowane podkreślenie w navbarze */
-    nav ul li a {
-      position: relative;
-      transition: color 0.3s ease;
-    }
-    nav ul li a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -3px;
-      width: 0%;
-      height: 2px;
-      background-color: #A3B18A;
-      transition: width 0.3s ease;
-    }
-    nav ul li a:hover::after {
-      width: 100%;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-    
-/* Korekta dla kotwic z fiksowanym nagłówkiem (naprawia problem "zjeżdżania za wysoko") */
-#kontakt:before, #o-mnie:before, #oferta:before, #nagrania:before, #opinie:before {
-  content: "";
-  display: block;
-  /* ZMNIEJSZAM WYSOKOŚĆ KOREKTY */
-  height: 64px; /* Wcześniej było 90px, teraz ustawiamy mniejszą wysokość */
-  margin-top: 35px; /* Przesuwa kotwicę w górę */
-  visibility: hidden;
-  pointer-events: none;
-}
-
-   /* ZMIEŃ ten fragment w bloku <style> */
-
-/* ZMIEŃ ten fragment w bloku <style> */
-
-/* NOWY STYL CSS dla menu, gdy jest aktywne na mobilnym */
-#mobile-menu {
-    /* Ustawienia dla animacji mobilnej (domyślny stan ukrycia) */
-    transform: translateX(-100%); 
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 50%; /* ZMIENIONO: Menu zajmuje teraz 50% szerokości ekranu */
-    height: 100vh; /* Zajmuje całą wysokość */
-    overflow-y: auto; 
-    z-index: 40; 
-    transition: transform 0.3s ease-out; 
-}
-
-/* WIDOCZNOŚĆ NA DESKTOPIE (md:): 
-   Resetujemy transformacje i pozycjonowanie mobilne */
-@media (min-width: 768px) {
-    #mobile-menu {
-        transform: translateX(0); /* Zawsze widoczne */
-        position: relative;     /* Wracamy do normalnego przepływu */
-        width: auto;            /* Szerokość automatyczna na desktopie */
-        height: auto;
-        overflow-y: visible;
-    }
-}
-
-/* Klasa dodawana przez JavaScript, która aktywuje widoczność */
-#mobile-menu.active {
-    transform: translateX(0);
-}
-
-
-/* Styl dla małego logo w nagłówku */
-    .header-logo {
-        width: 54px;  /* Szerokość */
-        height: 54px; /* Wysokość */
-        margin-right: 8px; /* Mały odstęp od tekstu VOCAVIOLIN */
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="text-white">
 
@@ -267,33 +21,33 @@
     <nav class="container mx-auto flex justify-between items-center p-4">
         
         <h1 class="text-2xl font-light flex items-center">
-            <img src="assets/images/biale_logo.png" alt="Logo Vocaviolin" class="header-logo">
+            <img src="assets/images/biale_logo.png" alt="Logo Vocaviolin" class="header-logo" loading="lazy">
             <span class="logo-font">VOCAVIOLIN</span>
         </h1>
 
-        <button id="menu-toggle" class="md:hidden text-white text-xl p-2 z-50">
+        <button id="menu-toggle" class="md:hidden text-white text-xl p-2 z-50" aria-label="Otwórz menu" aria-expanded="false">
             <i class="fas fa-bars"></i>
         </button>
 
 <div id="mobile-menu" class="flex md:flex md:grow md:justify-end absolute md:relative top-0 left-0 md:w-auto h-screen md:bg-transparent bg-gray-900/95 md:p-0 p-12 flex-col md:flex-row items-center justify-start space-y-8 md:space-y-0 transition-transform duration-300">
             
             <ul class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 items-center">
-            
-                <li><a href="#o-mnie">O mnie</a></li>
-                <li><a href="#oferta">Oferta</a></li>
-                <li><a href="#nagrania">Nagrania</a></li>
-                <li><a href="#opinie">Opinie</a></li>
-                <li><a href="#kontakt">Kontakt</a></li>
+    
+    <li class="text-lg"><a href="#o-mnie">O mnie</a></li>
+    <li class="text-lg"><a href="#oferta">Oferta</a></li>
+    <li class="text-lg"><a href="#nagrania">Nagrania</a></li>
+    <li class="text-lg"><a href="#opinie">Opinie</a></li>
+    <li class="text-lg"><a href="#kontakt">Kontakt</a></li>
 
-                <li class="flex space-x-3 ml-0 md:ml-6 mt-4 md:mt-0">
-                    <a href="https://www.instagram.com/vocaviolin/" target="_blank" class="text-white hover:text-[#A3B18A] transition">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://www.facebook.com/people/Vocaviolin-oprawa-muzyczna/61563820214452/" target="_blank" class="text-white hover:text-[#A3B18A] transition">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                </li>
-            </ul>
+    <li class="flex space-x-3 ml-0 md:ml-6 mt-4 md:mt-0">
+        <a href="https://www.instagram.com/vocaviolin/" target="_blank" class="text-white hover:text-[#A3B18A] transition social-icon-lg" aria-label="Instagram Vocaviolin">
+            <i class="fab fa-instagram" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.facebook.com/people/Vocaviolin-oprawa-muzyczna/61563820214452/" target="_blank" class="text-white hover:text-[#A3B18A] transition social-icon-lg" aria-label="Facebook Vocaviolin">
+            <i class="fab fa-facebook-f" aria-hidden="true"></i>
+        </a>
+    </li>
+</ul>
         </div>
     </nav>
 </header>
@@ -312,9 +66,9 @@
             </p>
             
             <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                <a href="#o-mnie" class="bg-[#A3B18A] hover:bg-[#879676] text-white font-semibold py-3 px-6 rounded-full transition w-full sm:w-auto text-center">Poznaj mnie</a>
-                <a href="#kontakt" class="bg-white/20 hover:bg-white/30 border border-white/50 text-white font-semibold py-3 px-6 rounded-full transition w-full sm:w-auto text-center">
-                    <i class="fas fa-envelope mr-2"></i>Kontakt
+                <a href="#o-mnie" class="bg-[#A3B18A] hover:bg-[#879676] text-white font-semibold py-3 px-6 rounded-full transition w-full sm:w-auto text-center focus:outline-none focus:ring-2 focus:ring-[#A3B18A] active:scale-95" aria-label="Poznaj mnie">Poznaj mnie</a>
+                <a href="#kontakt" class="bg-white/20 hover:bg-white/30 border border-white/50 text-white font-semibold py-3 px-6 rounded-full transition w-full sm:w-auto text-center focus:outline-none focus:ring-2 focus:ring-white active:scale-95" aria-label="Kontakt">
+                    <i class="fas fa-envelope mr-2" aria-hidden="true"></i>Kontakt
                 </a>
             </div>
         </div>
@@ -339,7 +93,7 @@
         </div>
         
         <div class="md:order-2">
-            <img src="assets/images/o_mnie.jpg" alt="Ja przy skrzypcach" class="rounded-xl shadow-2xl fade-section w-full h-auto max-w-full mx-auto">
+            <img src="assets/images/o_mnie.jpg" alt="Ja z skrzypcami i mikrofonem" class="rounded-xl shadow-2xl fade-section w-full h-auto max-w-full mx-auto" loading="lazy">
         </div>
 
     </div>
@@ -351,17 +105,17 @@
         
         <div class="bg-white/10 p-4 rounded-xl backdrop-blur-lg shadow-xl flex flex-col items-center justify-start group transition transform hover:scale-[1.03] hover:shadow-2xl">
             <div class="w-full aspect-square overflow-hidden rounded-lg mb-4">
-                <img src="assets/images/koscielny.jpeg" alt="Skrzypce w kościele" class="w-full h-full object-cover transition duration-300 group-hover:opacity-80">
+                <img src="assets/images/koscielny.JPEG" alt="Skrzypce i śpiew w kościele na ślubie" class="w-full h-full object-cover transition duration-300 group-hover:opacity-80" loading="lazy">
             </div>
             <h4 class="text-xl font-bold mb-2 text-center">Ślub w kościele</h4>
             <p class="text-center text-sm text-white/70 flex-grow">
-                Podniosła i wzruszająca oprawa ceremonii ślubnej na skrzypce i wokal. Klasyczny repertuar, który podkreśli sakralny charakter uroczystości.
+                Wzruszająca oprawa ceremonii ślubnej na skrzypce i wokal. Klasyczny repertuar, który podkreśli sakralny charakter uroczystości.
             </p>
         </div>
         
         <div class="bg-white/10 p-4 rounded-xl backdrop-blur-lg shadow-xl flex flex-col items-center justify-start group transition transform hover:scale-[1.03] hover:shadow-2xl">
             <div class="w-full aspect-square overflow-hidden rounded-lg mb-4">
-                <img src="assets/images/plener.JPEG" alt="Ślub w plenerze" class="w-full h-full object-cover transition duration-300 group-hover:opacity-80">
+                <img src="assets/images/plener.JPEG" alt="Ślub w plenerze, cywilny" class="w-full h-full object-cover transition duration-300 group-hover:opacity-80" loading="lazy">
             </div>
             <h4 class="text-xl font-bold mb-2 text-center">Ślub cywilny i plenerowy</h4>
             <p class="text-center text-sm text-white/70 flex-grow">
@@ -371,9 +125,9 @@
         
         <div class="bg-white/10 p-4 rounded-xl backdrop-blur-lg shadow-xl flex flex-col items-center justify-start group transition transform hover:scale-[1.03] hover:shadow-2xl">
             <div class="w-full aspect-square overflow-hidden rounded-lg mb-4">
-                <img src="assets/images/show.jpeg" alt="Występ estradowy" class="w-full h-full object-cover transition duration-300 group-hover:opacity-80">
+                <img src="assets/images/show.JPEG" alt="Występ estradowy, show muzyczne" class="w-full h-full object-cover transition duration-300 group-hover:opacity-80" loading="lazy">
             </div>
-            <h4 class="text-xl font-bold mb-2 text-center">Show muzyczne (Eventy)</h4>
+            <h4 class="text-xl font-bold mb-2 text-center">Show muzyczne</h4>
             <p class="text-center text-sm text-white/70 flex-grow">
                 Dynamiczne, rozrywkowe występy wokalno-skrzypcowe na eventy, bankiety firmowe i przyjęcia okolicznościowe.
             </p>
@@ -381,7 +135,7 @@
         
         <div class="bg-white/10 p-4 rounded-xl backdrop-blur-lg shadow-xl flex flex-col items-center justify-start group transition transform hover:scale-[1.03] hover:shadow-2xl">
             <div class="w-full aspect-square overflow-hidden rounded-lg mb-4">
-                <img src="assets/images/ostatnie.JPEG" alt="Poważna oprawa" class="w-full h-full object-cover transition duration-300 group-hover:opacity-80">
+                <img src="assets/images/ostatnie.JPEG" alt="Ostatnie pożegnanie" class="w-full h-full object-cover transition duration-300 group-hover:opacity-80" loading="lazy">
             </div>
             <h4 class="text-xl font-bold mb-2 text-center">Ostatnie pożegnanie</h4>
             <p class="text-center text-sm text-white/70 flex-grow">
@@ -450,33 +204,33 @@
   <h3 class="text-4xl font-bold mb-8">Kontakt</h3>
 
   <div class="flex flex-col sm:flex-row gap-6 mb-8">
-    <a href="https://www.instagram.com/vocaviolin/" target="_blank" class="flex items-center gap-3 text-white hover:text-[#A3B18A] transition">
-      <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
-        <i class="fab fa-instagram text-2xl"></i>
-      </div>
-      <span>@vocaviolin</span>
-    </a>
+        <a href="https://www.instagram.com/vocaviolin/" target="_blank" class="flex items-center gap-3 text-white hover:text-[#A3B18A] transition focus:outline-none focus:ring-2 focus:ring-[#A3B18A]" aria-label="Instagram Vocaviolin">
+            <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+                <i class="fab fa-instagram text-2xl" aria-hidden="true"></i>
+            </div>
+            <span>@vocaviolin</span>
+        </a>
 
-    <a href="https://www.facebook.com/people/Vocaviolin-oprawa-muzyczna/61563820214452/" target="_blank" class="flex items-center gap-3 text-white hover:text-[#A3B18A] transition">
-      <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
-        <i class="fab fa-facebook-f text-2xl"></i>
-      </div>
-      <span>/vocaviolin</span>
-    </a>
+        <a href="https://www.facebook.com/people/Vocaviolin-oprawa-muzyczna/61563820214452/" target="_blank" class="flex items-center gap-3 text-white hover:text-[#A3B18A] transition focus:outline-none focus:ring-2 focus:ring-[#A3B18A]" aria-label="Facebook Vocaviolin">
+            <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+                <i class="fab fa-facebook-f text-2xl" aria-hidden="true"></i>
+            </div>
+            <span>/vocaviolin</span>
+        </a>
 
-    <a href="mailto:kontakt@vocaviolin.pl" class="flex items-center gap-3 text-white hover:text-[#A3B18A] transition">
-      <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
-        <i class="fas fa-envelope text-2xl"></i>
-      </div>
-      <span>kontakt@vocaviolin.pl</span>
-    </a>
+        <a href="mailto:kontakt@vocaviolin.pl" class="flex items-center gap-3 text-white hover:text-[#A3B18A] transition focus:outline-none focus:ring-2 focus:ring-[#A3B18A]" aria-label="Wyślij e-mail">
+            <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+                <i class="fas fa-envelope text-2xl" aria-hidden="true"></i>
+            </div>
+            <span>kontakt@vocaviolin.pl</span>
+        </a>
 
-    <a href="tel:+48696578985" class="flex items-center gap-3 text-white hover:text-[#A3B18A] transition">
-      <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
-        <i class="fas fa-phone-alt text-2xl"></i>
-      </div>
-      <span>+48 696 578 985</span>
-    </a>
+        <a href="tel:+48696578985" class="flex items-center gap-3 text-white hover:text-[#A3B18A] transition focus:outline-none focus:ring-2 focus:ring-[#A3B18A]" aria-label="Zadzwoń">
+            <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+                <i class="fas fa-phone-alt text-2xl" aria-hidden="true"></i>
+            </div>
+            <span>+48 696 578 985</span>
+        </a>
   </div>
   <form action="send.php" method="POST" class="bg-white/10 p-6 rounded-xl backdrop-blur-lg shadow-lg max-w-lg w-full space-y-4">
     <h4 class="text-2xl font-semibold mb-2 text-center">Zapytaj o termin</h4>
@@ -520,7 +274,7 @@
             <p>&copy; 2025 <a href="https://lumoria-studio.pl">Lumoria-Studio</a>. Wszelkie prawa zastrzeżone.</p>
             <span class="hidden md:inline">|</span>
             <p>
-                <a href="mailto:kontakt@lumoria-studio.pl" class="hover:text-[#A3B18A] transition">
+                <a href="mailto:lumoria@hotmail.com" class="hover:text-[#A3B18A] transition">
                     Kontakt
                 </a>
             </p>
@@ -543,7 +297,7 @@
             // Sukces
             const successMessage = document.createElement('p');
             successMessage.className = 'text-green-400 text-xl font-bold mb-4 lora-font';
-            successMessage.textContent = 'Dziękujemy! Twoja rezerwacja została przesłana pomyślnie. Skontaktujemy się z Tobą wkrótce!';
+            successMessage.textContent = 'Dziękuję! Twoje zapytanie zostało przesłane pomyślnie. Skontaktuję się z Tobą wkrótce!';
             contactSection.insertBefore(successMessage, contactSection.querySelector('h3').nextSibling);
             
         } else if (success === 'false') {
@@ -583,6 +337,9 @@
     // Funkcja do przełączania menu
     const toggleMenu = () => {
         mobileMenu.classList.toggle('active'); // Przełączanie klasy dla animacji
+        // Zaktualizuj atrybut aria-expanded przycisku
+        const expanded = mobileMenu.classList.contains('active');
+        menuToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
     };
 
     // Obsługa kliknięcia ikony hamburgera

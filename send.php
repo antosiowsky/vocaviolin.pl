@@ -1,51 +1,63 @@
 <?php
-// Ustawienia e-mail
-$odbiorca = "kontakt@vocaviolin.pl"; // TWÓJ ADRES E-MAIL
+// Prostsza i bezpieczniejsza obsługa formularza kontaktowego
+$odbiorca = "kontakt@vocaviolin.pl"; // Odbiorca wiadomości
 $temat = "NOWA REZERWACJA / ZAPYTANIE ze strony Vocaviolin";
-$headers = "From: Twoja Strona <no-reply@twojadomena.pl>\r\n"; // ZMIEŃ NA SWOJĄ DOMENĘ
-$headers .= "Reply-To: " . $_POST['email'] . "\r\n"; // Umożliwienie odpowiedzi na e-mail klienta
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo 'Metoda niedozwolona.';
+    exit;
+}
+
+// Pobierz i zabezpiecz dane
+$name = isset($_POST['name']) ? trim($_POST['name']) : '';
+$email = isset($_POST['email']) ? trim($_POST['email']) : '';
+$datetime = isset($_POST['datetime']) ? trim($_POST['datetime']) : '';
+$location = isset($_POST['location']) ? trim($_POST['location']) : '';
+$notes = isset($_POST['notes']) ? trim($_POST['notes']) : '';
+
+// Proste czyszczenie wejścia
+$name = filter_var($name, FILTER_SANITIZE_STRING);
+$location = filter_var($location, FILTER_SANITIZE_STRING);
+$notes = filter_var($notes, FILTER_SANITIZE_STRING);
+
+// Walidacja podstawowa
+if (empty($name) || empty($datetime) || empty($location)) {
+    header('Location: index.html?success=false&error=missing_fields#kontakt');
+    exit;
+}
+
+// Walidacja e-mail (jeśli podano)
+$replyToHeader = '';
+if (!empty($email)) {
+    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        // unikamy wstrzyknięć nagłówków
+        $safeEmail = str_replace(array("\r", "\n"), '', $email);
+        $replyToHeader = "Reply-To: " . $safeEmail . "\r\n";
+    }
+}
+
+// Przygotuj nagłówki
+$headers = "From: Vocaviolin <no-reply@vocaviolin.pl>\r\n";
+$headers .= $replyToHeader;
 $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
-// Sprawdzenie, czy dane zostały wysłane metodą POST
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-    // Zbieranie danych z formularza
-    // Dane z inputów są dostępne w tablicy $_POST
-    $imie_nazwisko = filter_var(trim($_POST['name']), FILTER_SANITIZE_STRING);
-    $data_wydarzenia = filter_var(trim($_POST['datetime']), FILTER_SANITIZE_STRING);
-    $lokalizacja = filter_var(trim($_POST['location']), FILTER_SANITIZE_STRING);
-    $uwagi = filter_var(trim($_POST['notes']), FILTER_SANITIZE_STRING);
-    
-    // Walidacja - sprawdzenie, czy wymagane pola nie są puste
-    if (empty($imie_nazwisko) || empty($data_wydarzenia) || empty($lokalizacja)) {
-        // Przekierowanie z powrotem do strony głównej z komunikatem o błędzie
-        header("Location: index.html?success=false&error=missing_fields");
-        exit;
-    }
-    
-    // Budowanie treści wiadomości
-    $wiadomosc = "Otrzymano nową rezerwację/zapytanie:\n\n";
-    $wiadomosc .= "Imię i nazwisko: " . $imie_nazwisko . "\n";
-    $wiadomosc .= "Data i godzina wydarzenia: " . $data_wydarzenia . "\n";
-    $wiadomosc .= "Lokalizacja: " . $lokalizacja . "\n";
-    $wiadomosc .= "Dodatkowe uwagi: " . $uwagi . "\n";
+// Przygotuj treść
+$message = "Otrzymano nowe zapytanie z formularza kontaktowego:\n\n";
+$message .= "Imię i nazwisko: " . $name . "\n";
+$message .= "E-mail: " . ($email ?: 'Brak') . "\n";
+$message .= "Data i godzina wydarzenia: " . $datetime . "\n";
+$message .= "Lokalizacja: " . $location . "\n\n";
+$message .= "Dodatkowe uwagi:\n" . $notes . "\n";
 
-    // UWAGA: Twój formularz nie zawiera pola email, 
-    // więc nie można go użyć do Reply-To, ani go podać w treści.
-    // Dodaj to pole do HTML jeśli jest potrzebne!
-    
-    // Wysłanie e-maila
-    if (mail($odbiorca, $temat, $wiadomosc, $headers)) {
-        // Sukces: Przekierowanie z powrotem do strony głównej z komunikatem o sukcesie
-        header("Location: index.html?success=true");
-    } else {
-        // Błąd: Przekierowanie z komunikatem o błędzie wysyłki
-        header("Location: index.html?success=false&error=mail_failed");
-    }
-
+// Wyślij e-mail
+if (mail($odbiorca, $temat, $message, $headers)) {
+    header('Location: index.html?success=true#kontakt');
+    exit;
 } else {
-    // Próba bezpośredniego dostępu do send.php
-    http_response_code(403);
-    echo "Dostęp zabroniony.";
+    header('Location: index.html?success=false&error=mail_failed#kontakt');
+    exit;
 }
+
 ?>

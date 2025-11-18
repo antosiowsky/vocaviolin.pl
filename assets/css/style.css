@@ -1,0 +1,203 @@
+/* ------------------------------------------- */
+/* DEFINICJE CZCIONKI 'THE SEASONS' (6 wariantów OTF) */
+/* ------------------------------------------- */
+
+@font-face {
+    font-family: 'The Seasons';
+    src: url('../fonts/the_seasons/Fontspring-DEMO-theseasons-reg.otf') format('opentype');
+    font-weight: 400; 
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'The Seasons';
+    src: url('../fonts/the_seasons/Fontspring-DEMO-theseasons-lt.otf') format('opentype');
+    font-weight: 300; 
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'The Seasons';
+    src: url('../fonts/the_seasons/Fontspring-DEMO-theseasons-bd.otf') format('opentype');
+    font-weight: 700; 
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'The Seasons';
+    src: url('../fonts/the_seasons/Fontspring-DEMO-theseasons-it.otf') format('opentype');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'The Seasons';
+    src: url('../fonts/the_seasons/Fontspring-DEMO-theseasons-ltit.otf') format('opentype');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'The Seasons';
+    src: url('../fonts/the_seasons/Fontspring-DEMO-theseasons-bdit.otf') format('opentype');
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Moon Time';
+    src: url('../fonts/moon_time/FontsFree-Net-MoonTime-Regular-1.ttf') format('truetype');
+    font-weight: 400; 
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Lora-Variable';
+    src: url('../fonts/lora/Lora-VariableFont_wght.ttf') format('truetype-variations');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+.moon-time-font {
+    font-family: 'Moon Time', cursive;
+    letter-spacing: 0.1em;
+    font-weight: 400;
+}
+.lora-font {
+    font-family: 'Lora-Variable', serif;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+}
+.glass-header {
+  background-color: rgba(255, 255, 255, 0.15);
+  -webkit-backdrop-filter: blur(10px) saturate(120%);
+  backdrop-filter: blur(10px) saturate(120%);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  z-index: 100;
+}
+.fade-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+body {
+  font-family: 'Playfair Display', serif;
+  background-color: #889D7A;
+}
+.logo-font {
+    font-family: 'The Seasons', serif; 
+    font-weight: 700 !important;
+    letter-spacing: 0.3em;
+    font-size: 2.2rem;
+    white-space: nowrap;
+}
+@media (max-width: 480px) {
+  .logo-font {
+    font-size: 1.4rem;
+    letter-spacing: 0.15em;
+  }
+}
+.video-card {
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  cursor: pointer;
+}
+.video-card:hover {
+  transform: scale(1.10);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.7);
+  z-index: 20;
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0,0,0,0.4);
+  backdrop-filter: blur(3px);
+  z-index: -1;
+}
+#hero-section {
+    position: relative;
+    background: url('../images/micha169.jpg') no-repeat center center;
+    background-size: cover;
+    background-position: center top;
+    padding-top: 5rem;
+    z-index: 10;
+}
+#hero-section::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+}
+nav ul li a {
+  position: relative;
+  transition: color 0.3s ease;
+}
+nav ul li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 2px;
+  background-color: #A3B18A;
+  transition: width 0.3s ease;
+}
+nav ul li a:hover::after {
+  width: 100%;
+}
+html {
+  scroll-behavior: smooth;
+}
+#kontakt:before, #o-mnie:before, #oferta:before, #nagrania:before, #opinie:before {
+  content: "";
+  display: block;
+  height: 64px;
+  margin-top: 35px;
+  visibility: hidden;
+  pointer-events: none;
+}
+#mobile-menu {
+    transform: translateX(-100%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 40;
+    transition: transform 0.3s ease-out;
+}
+@media (min-width: 768px) {
+    #mobile-menu {
+        transform: translateX(0);
+        position: relative;
+        width: auto;
+        height: auto;
+        overflow-y: visible;
+    }
+}
+#mobile-menu.active {
+    transform: translateX(0);
+}
+.social-icon-lg i {
+    font-size: 1.5rem;
+}
+.header-logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 8px;
+}
+
+/* Dodatkowe style dostępu: widoczny fokus dla linków/przycisków */
+a:focus, button:focus, input:focus, textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(163,177,138,0.18);
+  border-radius: 0.375rem;
+}
